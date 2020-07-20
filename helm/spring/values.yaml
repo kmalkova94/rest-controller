@@ -1,0 +1,26 @@
+replicaCount: 1
+
+image:
+  repository: rest-controller
+  pullPolicy: Always
+  tag: latest
+
+nameOverride: rest-controller
+fullnameOverride: rest-controller
+ports:
+  nodePort: 32090
+app:
+  server:
+    port: 8080
+  kafka:
+    brokerHost: kafka-cp-kafka-headless
+    brokerPort: 9092
+    topic:
+      name: app-topic
+      partitions: 1
+      replicas: 1
+      customerKey: customer-key
+    schemaRegistrySchema: http
+    schemaRegistryHost: kafka-cp-schema-registry
+    schemaRegistryPort: 8081
+    autoRegisterSchemas: true
